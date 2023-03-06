@@ -1,26 +1,19 @@
-workspace "astro-core"
-    startproject "astro-core-editor"
-    architecture "x64"
+-- Makes a path relative to the folder containing this script file.
+ROOT_PATH = function(path)
+    return string.format("%s/%s", _MAIN_SCRIPT_DIR, path)
+end
 
-    configurations
-    {
-        "Debug",
-        "Release"
-    }
+PROJ_DIR = ROOT_PATH "projects"
+DEP_DIR  = ROOT_PATH "dependencies"
+BIN_DIR  = ROOT_PATH "_out/bin/%{cfg.buildcfg}-%{cfg.platform}/%{prj.name}"
+OBJ_DIR  = ROOT_PATH "_out/obj/%{cfg.buildcfg}-%{cfg.platform}/%{prj.name}"
 
-project "astro-core-editor"
-    location "astro-core-editor"
-    kind "ConsoleApp"
-    language "C++"
-    cppdialect "c++17"
+WORKSPACE_NAME = "workspace"
+START_PROJECT  = "program"
 
-    files
-    {
-        "%{prj.name}/src/**.hpp",
-        "%{prj.name}/src/**.cpp"
-    }
+include "workspace.lua"
+include "projects.lua"
 
-    flags
-    {
-        "FatalWarnings"
-    }
+for _, path in ipairs(PROJECTS) do
+    include(path .. "/premake5.lua")
+end
