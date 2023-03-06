@@ -5,12 +5,20 @@ bin*/
 logs/
 
 
+# Build output
+_out/
+
+
 # Files
 *.user
 *.DS_STORE
 *.xcworkspace/
 *.xcodeproj/
-*.vcxproj*
-*.sln
-*Makefile
 *.pyc
+*.vs/
+*.vscode/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*Makefile
